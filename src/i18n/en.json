@@ -421,5 +421,15 @@
         "f": "Antivirus or corporate proxy — try a personal network."
       }
     ]
+  },
+  "chapterDetail": {
+    "back": "← All chapters",
+    "blocksHeading": "Block breakdown",
+    "blocksIntro": "What each session covers. Tier pills show when AI is off (A), foundation (B), or AI-default (C).",
+    "durationLabel": "Duration",
+    "ch0Heading": "Async setup — no live blocks",
+    "ch0Body": "Chapter 0 runs before class: install your tools and verify your machine is ready.",
+    "ch0Cta": "Open the setup guide →",
+    "myPending": "[MY] Chapter detail is shown in English for now — Burmese translation pending."
   }
 }

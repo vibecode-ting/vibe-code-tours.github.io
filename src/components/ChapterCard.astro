@@ -4,9 +4,10 @@ import type { Chapter } from '../data/chapters';
 interface Props {
   chapter: Chapter;
   readMore: string;
+  href: string;
 }
 
-const { chapter, readMore } = Astro.props;
+const { chapter, readMore, href } = Astro.props;
 const { num, tag, title, outcome, tiers, duration, hero = false } = chapter;
 ---
 
@@ -30,5 +31,5 @@ const { num, tag, title, outcome, tiers, duration, hero = false } = chapter;
     ))}
   </div>
 
-  <p class="mt-4 text-xs font-medium uppercase tracking-wide text-gray-400">{readMore}</p>
+  <a href={href} class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent-800">{readMore}</a>
 </article>

@@ -1,5 +1,5 @@
 ---
-import { t, getLocale, type Locale } from '../i18n/utils';
+import { t, getLocale, localizedPath, type Locale } from '../i18n/utils';
 import { chapters } from '../data/chapters';
 import ChapterCard from './ChapterCard.astro';
 
@@ -8,6 +8,7 @@ const s = t(locale).curriculum;
 
 const hero = chapters.find((c) => c.hero);
 const rest = chapters.filter((c) => !c.hero);
+const chHref = (num: number) => localizedPath(`/curriculum/ch-${num}`, locale);
 ---
 
 <section class="mx-auto max-w-4xl px-5 py-12 sm:px-6">
@@ -21,13 +22,13 @@ const rest = chapters.filter((c) => !c.hero);
     {hero && (
       <div class="mb-4">
         <p class="mb-2 text-xs font-bold uppercase tracking-widest text-accent-700">{s.startHere}</p>
-        <ChapterCard chapter={hero} readMore={s.readMore} />
+        <ChapterCard chapter={hero} readMore={s.readMore} href={chHref(hero.num)} />
       </div>
     )}
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       {rest.map((chapter) => (
-        <ChapterCard chapter={chapter} readMore={s.readMore} />
+        <ChapterCard chapter={chapter} readMore={s.readMore} href={chHref(chapter.num)} />
       ))}
     </div>
   </div>
