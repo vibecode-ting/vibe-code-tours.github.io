@@ -140,14 +140,18 @@ const rivets = [
           stroke="#00000022"
           stroke-width="0.6"
         >
-          <path d="M60 28 C82 17 104 17 124 24 C104 24 96 28 84 35 C74 30 66 30 60 33 Z" />
+          <path d="M57 33 C82 19 103 17 121 21 C104 24 91 30 75 41 C69 37 63 35 57 36 Z" />
           <path
-            d="M60 35 C78 27 96 27 112 33 C96 32 90 35 80 41 C72 37 66 37 60 39 Z"
-            opacity="0.92"
+            d="M57 38 C78 26 96 25 111 29 C96 31 85 36 72 45 C67 41 62 39 57 40 Z"
+            opacity="0.9"
           />
           <path
-            d="M60 42 C74 36 88 36 100 41 C88 41 84 43 76 47 C70 44 65 44 60 45 Z"
-            opacity="0.85"
+            d="M57 43 C73 33 88 33 100 37 C88 39 79 43 69 49 C65 46 61 44 57 44 Z"
+            opacity="0.8"
+          />
+          <path
+            d="M57 47 C69 41 81 41 90 45 C81 47 74 50 67 53 C64 51 60 49 57 49 Z"
+            opacity="0.7"
           />
         </g>
         <use href={`#${uid}wing`} transform="matrix(-1 0 0 1 120 0)" />
@@ -223,68 +227,49 @@ const rivets = [
 
 <style>
   .rank-badge {
-    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+      filter 0.3s ease;
     transform-origin: center;
     will-change: transform;
   }
-  /* lively hover: pop + tilt on the card */
+  /* Motion on intent only: a gentle lift + faint catch-light. No spin, no idle. */
   :global(.group:hover) .rank-badge,
   :global(.group:focus-within) .rank-badge {
-    transform: scale(1.14) rotate(-4deg);
+    transform: scale(1.05) translateY(-1px);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
   }
-  /* shine: idle only on winged (gold/amethyst) tiers; on hover for all */
   .rbshine {
     transform: translateX(-60px);
     opacity: 0;
   }
-  .rank-badge[data-wings] .rbshine {
-    opacity: 1;
-    animation: rbShine 3.4s ease-in-out 1s infinite;
-  }
+  /* one restrained shine sweep, hover/focus only, fades in and out */
   :global(.group:hover) .rbshine,
   :global(.group:focus-within) .rbshine {
-    opacity: 1;
-    animation: rbShine 0.85s ease forwards;
+    animation: rbShine 1.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   @keyframes rbShine {
     0% {
-      transform: translateX(-60px);
+      transform: translateX(-55px);
+      opacity: 0;
+    }
+    22% {
+      opacity: 0.55;
     }
     100% {
-      transform: translateX(180px);
+      transform: translateX(172px);
+      opacity: 0;
     }
   }
-  /* star twinkle on winged tiers */
   .rbstar {
     transform-box: fill-box;
     transform-origin: center;
-  }
-  .rank-badge[data-wings] .rbstar {
-    animation: rbTwinkle 2.6s ease-in-out infinite;
-  }
-  .rank-badge[data-wings] .rbstar:nth-child(2) {
-    animation-delay: 0.5s;
-  }
-  .rank-badge[data-wings] .rbstar:nth-child(3) {
-    animation-delay: 1s;
-  }
-  @keyframes rbTwinkle {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.55;
-      transform: scale(0.82);
-    }
   }
   @media (prefers-reduced-motion: reduce) {
     .rank-badge {
       transition: none;
     }
-    .rbshine,
-    .rbstar {
+    .rbshine {
       animation: none !important;
     }
   }
